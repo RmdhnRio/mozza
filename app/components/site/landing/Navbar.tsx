@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,6 +27,7 @@ export default function Navbar() {
   ]
 
   const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false)
     const element = document.getElementById(id.replace('#', ''))
     if (element) {
       const offset = 80
@@ -43,21 +45,21 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-[99] transition-all duration-300 ${scrolled
-        ? 'bg-white/80 backdrop-blur-md shadow-sm py-4'
-        : 'bg-transparent py-6'
+      className={`fixed top-0 left-0 w-full z-[99] transition-all duration-300 ${scrolled || isMobileMenuOpen
+        ? 'bg-white/90 backdrop-blur-md shadow-sm py-4'
+        : 'bg-white/90 md:bg-transparent py-4 md:py-6 shadow-sm md:shadow-none' // Added mobile background
         }`}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-16 lg:px-24">
         {/* === Logo === */}
-        <Link href="/" className="group">
-          <span className={`font-plein font-bold text-2xl md:text-3xl transition-colors duration-300 ${scrolled ? 'text-brand-purple' : 'text-white'
+        <Link href="/" className="group z-50">
+          <span className={`font-plein font-bold text-2xl md:text-3xl transition-colors duration-300 ${scrolled || isMobileMenuOpen ? 'text-brand-purple' : 'text-brand-purple md:text-white' // Adjusted for mobile background
             }`}>
             MOZZA
           </span>
         </Link>
 
-        {/* === Navigation Links === */}
+        {/* === Desktop Navigation === */}
         <ul className="hidden md:flex items-center gap-8 lg:gap-12">
           {navLinks.map((link) => (
             <li key={link.name}>
@@ -79,12 +81,43 @@ export default function Navbar() {
         </ul>
 
         {/* === Mobile Menu Button === */}
-        <button className={`md:hidden transition-colors duration-300 ${scrolled ? 'text-gray-800' : 'text-white'
-          }`}>
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className={`md:hidden z-50 transition-colors duration-300 ${scrolled || isMobileMenuOpen ? 'text-gray-800' : 'text-gray-800' // Changed to always dark on mobile
+            }`}
+        >
+          {isMobileMenuOpen ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
         </button>
+
+        {/* === Mobile Menu Overlay === */}
+        <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center transition-transform duration-300 md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}>
+          <ul className="flex flex-col items-center gap-8">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <Link
+                  href={link.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollToSection(link.href)
+                  }}
+                  className="font-plein font-bold text-2xl text-gray-800 hover:text-brand-purple transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+
       </div>
     </nav>
   )

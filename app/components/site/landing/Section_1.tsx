@@ -11,16 +11,16 @@ export default function Section1() {
   ]
 
   return (
-    <section id="service" className="relative bg-white pb-24">
+    <section id="service" className="relative bg-white pb-16 md:pb-24 pt-10 px-4">
 
-      <h2 className="text-center font-plein text-3xl md:text-4xl text-purple-500 mb-5">
+      <h2 className="text-center font-plein text-3xl md:text-4xl text-purple-500 mb-8 md:mb-5">
         Everything you need, <br /> all in one piece!
       </h2>
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center px-6 md:px-16 lg:px-24">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center px-4 md:px-16 lg:px-24">
 
         {/* Left Dog Illustration */}
-        <div className="flex justify-center">
+        <div className="relative w-full max-w-[320px] md:max-w-[480px]">
           <Image
             src="/images/shopping_dog.png"
             width={480}
@@ -31,7 +31,7 @@ export default function Section1() {
         </div>
 
         {/* Right Service Grid */}
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
           {services.map((s, i) => (
             <div
               key={i}

@@ -6,17 +6,18 @@ import { Button } from '@/app/components/ui/button';
 
 export default function Section3() {
   return (
-    <section className="relative py-32 px-6 md:px-16 lg:px-24 bg-white">
+    <section className="relative py-16 md:py-32 px-6 md:px-16 lg:px-24 bg-white">
 
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
 
         {/* LEFT CAPTION */}
-        <div>
-          <h2 className="font-plein font-bold text-[4rem] leading-[1.1] text-brand-green mb-6">
+        <div className="text-center md:text-left">
+          {/* Responsive Text Size: text-5xl di mobile, text-[4rem] di desktop */}
+          <h2 className="font-plein font-bold text-5xl md:text-[4rem] leading-[1.1] text-brand-green mb-6">
             Grooming
           </h2>
 
-          <p className="font-switzer text-gray-700 text-lg leading-relaxed max-w-md mb-10">
+          <p className="font-switzer text-gray-700 text-lg leading-relaxed max-w-md mx-auto md:mx-0 mb-10">
             Happy to help you keep your furry friends looking their best!
             We offer a range of grooming services for cats and dogs, including baths, nail trimming, and grooming.
             Our team of experienced groomers will ensure your pet is comfortable and happy during their grooming session.
@@ -28,38 +29,49 @@ export default function Section3() {
         </div>
 
         {/* RIGHT IMAGES */}
-        <div className="relative flex justify-center md:justify-end">
+        <div className="relative flex justify-center md:justify-end mt-8 md:mt-0">
 
-          <div
-            className="
-                    w-[380px] h-[560px]
-                    overflow-hidden
-                    relative"
-          >
-            <Image
-              src="/images/cat_grooming.png"
-              alt="Cat Grooming"
-              width={380}
-              height={560}
-              className="object-cover w-full h-full"
-            />
+          {/* Wrapper Container untuk menjaga posisi relatif gambar */}
+          <div className="relative">
+            {/* Main Image */}
+            <div
+              className="
+                w-[280px] h-[410px] 
+                md:w-[380px] md:h-[560px]
+                overflow-hidden
+                relative rounded-2xl"
+            >
+              <Image
+                src="/images/cat_grooming.png"
+                alt="Cat Grooming"
+                width={380}
+                height={560}
+                className="object-cover w-full h-full"
+              />
+            </div>
+
+            {/* Secondary Image (Overlapping) */}
+            {/* Posisi absolute relatif terhadap wrapper, bukan section */}
+            <div
+              className="
+                w-[160px] h-[160px]
+                md:w-[230px] md:h-[230px]
+                overflow-hidden
+                absolute -bottom-8 -right-[320px]
+                md:bottom-[-40px] md:right-[320px]
+                
+              "
+            >
+              <Image
+                src="/images/dog_grooming.png"
+                alt="Dog Grooming"
+                width={230}
+                height={230}
+                className="object-cover w-full h-full"
+              />
+            </div>
           </div>
 
-          <div
-            className="
-                    w-[230px] h-[230px]
-                    overflow-hidden
-                    absolute bottom-[-40px] right-[320px]
-                  "
-          >
-            <Image
-              src="/images/dog_grooming.png"
-              alt="Dog Grooming"
-              width={230}
-              height={230}
-              className="object-cover w-full h-full"
-            />
-          </div>
         </div>
       </div>
     </section>

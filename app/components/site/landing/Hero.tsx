@@ -34,7 +34,7 @@ export default function Hero() {
   const blob3Y = useTransform(mouseY, [-0.5, 0.5], [20, -20])
 
   return (
-    <section className="relative min-h-[130vh] bg-white overflow-hidden">
+    <section className="relative min-h-[100vh] md:min-h-[130vh] bg-white overflow-hidden">
       <Navbar />
 
       {/* LAYER 1 — white bg */}
@@ -48,48 +48,48 @@ export default function Hero() {
           left-1/2
           -translate-x-1/2
           w-[104%]
-          h-[100vh]
+          h-[80vh] md:h-[100vh]
           bg-hero-gradient
-          rounded-bl-[600px]
+          rounded-bl-[150px] md:rounded-bl-[600px]
           z-[1]
           overflow-hidden
         "
       />
 
-      {/* LAYER 2b — bottom fade (soft connect to section1) */}
+      {/* LAYER 2b — bottom fade */}
       <div
         className="
-          absolute bottom-0 left-0 w-full h-[180px] z-[2]
+          absolute bottom-0 left-0 w-full h-[100px] md:h-[180px] z-[2]
           pointer-events-none
           bg-gradient-to-b from-transparent to-white
         "
       />
 
-      {/* BLOBS */}
+      {/* BLOBS - Adjusted for mobile visibility */}
       <motion.div
-        className="absolute top-[7%] left-[28%] w-[180px] z-[10]"
+        className="absolute top-[15%] left-[5%] md:top-[7%] md:left-[28%] w-[120px] md:w-[180px] z-[2] md:z-[10] opacity-60 md:opacity-100"
         style={{ x: blob1X, y: yBlob1 }}
       >
         <Image src="/images/blob_1.png" width={180} height={180} alt="blob1" />
       </motion.div>
 
       <motion.div
-        className="absolute top-[0%] right-[-5%] w-[260px] z-[3]"
+        className="absolute top-[10%] right-[-10%] md:top-[0%] md:right-[-5%] w-[180px] md:w-[260px] z-[3]"
         style={{ x: blob2X, y: yBlob2 }}
       >
         <Image src="/images/blob_2.png" width={260} height={260} alt="blob2" />
       </motion.div>
 
       <motion.div
-        className="absolute bottom-[45%] left-[50%] w-[200px] z-[3]"
+        className="absolute bottom-[30%] left-[10%] md:bottom-[45%] md:left-[50%] w-[140px] md:w-[200px] z-[3]"
         style={{ x: blob3X, y: yBlob3 }}
       >
         <Image src="/images/blob_3.png" width={200} height={200} alt="blob3" />
       </motion.div>
 
       {/* TEXT */}
-      <div className="relative z-[4] max-w-3xl px-6 pt-[18vh] ml-[25%]">
-        <h1 className="font-switzer text-white font-medium leading-[1] text-[rem] md:text-[4.5rem] lg:text-[6rem]">
+      <div className="relative z-[4] max-w-3xl px-6 pt-[25vh] md:pt-[18vh] mx-auto md:ml-[25%] text-center md:text-left">
+        <h1 className="font-switzer text-white font-medium leading-[1.1] md:leading-[1] text-5xl md:text-[4.5rem] lg:text-[6rem]">
           We Care your <br />
           Anabul <br />
           the same <br />
@@ -97,7 +97,7 @@ export default function Hero() {
         </h1>
       </div>
 
-      {/* DOG */}
+      {/* DOG - Hidden on mobile as per original, kept for desktop */}
       <div className="absolute bottom-[18%] left-[5%] z-[50] hidden md:block">
         <Image
           src="/images/dog.png"
@@ -108,7 +108,7 @@ export default function Hero() {
         />
       </div>
 
-      {/* CAT */}
+      {/* CAT - Hidden on mobile as per original, kept for desktop */}
       <div className="absolute top-[47%] right-[-12%] z-[50] hidden md:block">
         <Image
           src="/images/cat.png"
