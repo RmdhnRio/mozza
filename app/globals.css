@@ -1,15 +1,75 @@
 @import "tailwindcss";
 
+html {
+  scroll-behavior: smooth;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
 }
 
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-switzer), var(--font-plein), sans-serif;
+}
+
+@font-face {
+  font-family: 'Plein';
+  src: url('/fonts/Plein-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Plein';
+  src: url('/fonts/Plein-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Semibold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Switzer';
+  src: url('/fonts/Switzer-Medium.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --background-image-hero-gradient: linear-gradient(135deg, #DDA5FF 0%, #FFBCBC 52%, #FFC73B 100%);
+  --font-plein: var(--font-plein);
+  --font-switzer: var(--font-switzer);
+  --color-brand-peach: #FFC73B;
+  --color-brand-pink: #FF6C99;
+  --color-brand-purple: #A56DC7;
+  --color-brand-green: #41EAC1;
+  --color-brand-turquoise: #3BE8C6;
+  --color-brand-soft-pink: #FFBCBC;
+  --color-brand-soft-orange: #FDBB85;
+  --color-neutral-white: #FFFFFF;
+  --color-neutral-gray-50: #F1F1F1;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,8 +79,24 @@
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.nav-link {
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+.shadow-mozza {
+  box-shadow:
+    0px 40px 120px rgba(250, 150, 200, 0.28),
+    0px 20px 60px rgba(200, 120, 255, 0.50),
+    0px 0px 40px rgba(255, 190, 240, 0.18);
+
+}
+
+.brand-scroll {
+  scrollbar-width: none;
+  /* Firefox */
+}
+
+.brand-scroll::-webkit-scrollbar {
+  display: none;
+  /* Chrome/Safari */
 }
