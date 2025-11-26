@@ -45,15 +45,20 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-[99] transition-all duration-300 ${scrolled || isMobileMenuOpen
-        ? 'bg-white/90 backdrop-blur-md shadow-sm py-4'
-        : 'bg-white/90 md:bg-transparent py-4 md:py-6 shadow-sm md:shadow-none' // Added mobile background
-        }`}
+      className={`fixed top-0 left-0 w-full z-[99] transition-all duration-300 
+        ${scrolled || isMobileMenuOpen
+          ? 'bg-white shadow-sm py-4 pt-8 md:pt-4' // Solid white, extra top padding on mobile
+          : 'bg-white pt-8 pb-4 md:bg-transparent md:py-6 md:pt-6 shadow-sm md:shadow-none' // Mobile: Solid white + padding. Desktop: Transparent
+        }
+      `}
     >
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-16 lg:px-24">
         {/* === Logo === */}
         <Link href="/" className="group z-50">
-          <span className={`font-plein font-bold text-2xl md:text-3xl transition-colors duration-300 ${scrolled || isMobileMenuOpen ? 'text-brand-purple' : 'text-brand-purple md:text-white' // Adjusted for mobile background
+          <span className={`font-plein font-bold text-2xl md:text-3xl transition-colors duration-300 
+            ${scrolled || isMobileMenuOpen
+              ? 'text-brand-purple'
+              : 'text-brand-purple md:text-white' // Mobile: Purple. Desktop: White (at top)
             }`}>
             MOZZA
           </span>
@@ -69,11 +74,15 @@ export default function Navbar() {
                   e.preventDefault()
                   scrollToSection(link.href)
                 }}
-                className={`font-plein font-medium text-base lg:text-lg transition-all duration-300 relative group ${scrolled ? 'text-gray-600 hover:text-brand-purple' : 'text-white/90 hover:text-white'
+                className={`font-plein font-medium text-base lg:text-lg transition-all duration-300 relative group 
+                  ${scrolled
+                    ? 'text-gray-600 hover:text-brand-purple'
+                    : 'text-white/90 hover:text-white'
                   }`}
               >
                 {link.name}
-                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full ${scrolled ? 'bg-brand-purple' : 'bg-white'
+                <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full 
+                  ${scrolled ? 'bg-brand-purple' : 'bg-white'
                   }`} />
               </Link>
             </li>
@@ -83,7 +92,10 @@ export default function Navbar() {
         {/* === Mobile Menu Button === */}
         <button
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className={`md:hidden z-50 transition-colors duration-300 ${scrolled || isMobileMenuOpen ? 'text-gray-800' : 'text-gray-800' // Changed to always dark on mobile
+          className={`md:hidden z-50 transition-colors duration-300 
+            ${scrolled || isMobileMenuOpen
+              ? 'text-gray-800'
+              : 'text-gray-800' // Always dark on mobile
             }`}
         >
           {isMobileMenuOpen ? (
@@ -98,8 +110,10 @@ export default function Navbar() {
         </button>
 
         {/* === Mobile Menu Overlay === */}
-        <div className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center transition-transform duration-300 md:hidden ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          }`}>
+        {/* Added 'top-[60px]' to start below navbar, and ensure bg-white is solid */}
+        <div className={`fixed inset-0 top-0 bg-white z-40 flex flex-col items-center justify-center transition-transform duration-300 md:hidden 
+          ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}
+        `}>
           <ul className="flex flex-col items-center gap-8">
             {navLinks.map((link) => (
               <li key={link.name}>

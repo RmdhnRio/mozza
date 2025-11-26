@@ -57,8 +57,8 @@ export default function Section3() {
                 w-[160px] h-[160px]
                 md:w-[230px] md:h-[230px]
                 overflow-hidden
-                absolute -bottom-8 -right-[320px]
-                md:bottom-[-40px] md:right-[320px]
+                absolute -bottom-8 -left-[0]
+                md:bottom-[-40px] md:left-[-150px]
                 
               "
             >
