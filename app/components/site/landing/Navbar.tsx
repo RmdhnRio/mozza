@@ -3,7 +3,16 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 
-export default function Navbar() {
+interface NavbarProps {
+  variant?: 'light' | 'dark'
+
+  linkClassName?: string
+}
+
+export default function Navbar({
+  variant = 'light',
+  linkClassName
+}: NavbarProps) {
   const [scrolled, setScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -21,7 +30,8 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Service', href: '#service' },
-    { name: 'Shop', href: '#shop' },
+    { name: 'Shop', href: '/shop' },
+    { name: 'Cafe', href: '/cafe' },
     { name: 'About', href: '#about' },
     { name: 'Contact', href: '#contact' },
   ]
@@ -58,7 +68,9 @@ export default function Navbar() {
           <span className={`font-plein font-bold text-2xl md:text-3xl transition-colors duration-300 
             ${scrolled || isMobileMenuOpen
               ? 'text-brand-purple'
-              : 'text-brand-purple md:text-white' // Mobile: Purple. Desktop: White (at top)
+              : variant === 'dark'
+                ? 'text-brand-purple'
+                : 'text-brand-purple md:text-white'
             }`}>
             MOZZA
           </span>
@@ -71,18 +83,24 @@ export default function Navbar() {
               <Link
                 href={link.href}
                 onClick={(e) => {
-                  e.preventDefault()
-                  scrollToSection(link.href)
+                  // Only scroll for anchor links, allow normal navigation for routes
+                  if (link.href.startsWith('#')) {
+                    e.preventDefault()
+                    scrollToSection(link.href)
+                  }
                 }}
                 className={`font-plein font-medium text-base lg:text-lg transition-all duration-300 relative group 
-                  ${scrolled
-                    ? 'text-gray-600 hover:text-brand-purple'
-                    : 'text-white/90 hover:text-white'
-                  }`}
+          ${linkClassName ? linkClassName : (
+                    scrolled
+                      ? 'text-gray-600 hover:text-brand-purple'
+                      : variant === 'dark'
+                        ? 'text-gray-600 hover:text-brand-purple'
+                        : 'text-white/90 hover:text-white'
+                  )}`}
               >
                 {link.name}
                 <span className={`absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full 
-                  ${scrolled ? 'bg-brand-purple' : 'bg-white'
+          ${scrolled || variant === 'dark' ? 'bg-brand-purple' : 'bg-white'
                   }`} />
               </Link>
             </li>
@@ -120,8 +138,13 @@ export default function Navbar() {
                 <Link
                   href={link.href}
                   onClick={(e) => {
-                    e.preventDefault()
-                    scrollToSection(link.href)
+                    // Only scroll for anchor links, allow normal navigation for routes
+                    if (link.href.startsWith('#')) {
+                      e.preventDefault()
+                      scrollToSection(link.href)
+                    } else {
+                      setIsMobileMenuOpen(false)
+                    }
                   }}
                   className="font-plein font-bold text-2xl text-gray-800 hover:text-brand-purple transition-colors"
                 >

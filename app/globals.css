@@ -100,3 +100,99 @@ body {
   display: none;
   /* Chrome/Safari */
 }
+
+.food-card-promo-ribbon {
+  transform: rotate(-45deg);
+  transform-origin: top left;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Add to Cart Animation */
+@keyframes cart-bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-cart-bounce {
+  animation: cart-bounce 0.5s ease-in-out;
+}
+
+/* Fade In Animations (Tailwind animate-in compatible) */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(10px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes zoom-in {
+  from {
+    transform: scale(0.8);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+.animate-in {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+}
+
+.fade-in {
+  animation-name: fade-in;
+}
+
+.slide-in-from-bottom-2 {
+  animation-name: fade-in, slide-in-from-bottom;
+}
+
+.zoom-in {
+  animation-name: fade-in, zoom-in;
+}
+
+/* Flying to Cart Animation */
+@keyframes flyToCart {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+
+  50% {
+    transform: translate(calc(var(--target-x) * 0.5), calc(var(--target-y) * 0.3 - 50px)) scale(0.8);
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translate(var(--target-x), var(--target-y)) scale(0.3);
+    opacity: 0;
+  }
+}
